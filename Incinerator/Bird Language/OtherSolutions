@@ -1,0 +1,16 @@
+from re import sub
+
+def translate(phrase):
+
+    prune = lambda exp, phr: sub(exp.format('aeiouy'), r'\1', phr)
+
+    return prune(r'([{0}])\1\1', prune(r'([^ {0}])[{0}]', phrase))
+
+-----------------------------------------------------------------------
+
+
+
+import re,functools
+
+translate=functools.partial(re.sub,r"(\w)(\1\1|.)",r"\1")
+
