@@ -1,0 +1,1 @@
+This island is full of strange machines and wondrous inventions with mysterious purposes. Will you be able to solve The Strange Circuit or figure out The Broken Clock? Prepare for inspirational lightning to strike on this electric adventure! 
