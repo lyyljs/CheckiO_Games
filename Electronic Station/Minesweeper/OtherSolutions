@@ -1,0 +1,100 @@
+def checkio(field):
+
+    def get(p):
+
+        return field[p[1]][p[0]]
+
+​
+
+    def all_cells():
+
+        h = len(field)
+
+        w = len(field[0])
+
+        return [(x, y) for y in range(h) for x in range(w)]
+
+​
+
+    def get_around_cells(center):
+
+        return [p for p in all_cells() if p != center and abs(center[1] - p[1]) <= 1 and abs(center[0] - p[0]) <= 1]
+
+​
+
+    if get((0, 0)) == -1:
+
+        return [False, 0, 0]
+
+​
+
+    check_list = []  # list of (covered_cells, covered_mines)
+
+    for pt in all_cells():
+
+        n = get(pt)
+
+        if 0 <= n <= 8:
+
+            covered_cells = {p for p in get_around_cells(pt) if get(p) == -1}  # set
+
+            if len(covered_cells) > 0:
+
+                covered_mines = n - len([p for p in get_around_cells(pt) if get(p) == 9])
+
+                check_list.append((covered_cells, covered_mines))
+
+​
+
+    checked = []
+
+    while len(check_list) > 0:
+
+        # Simple cases:
+
+        # ({A}, 1)   -> A = mine
+
+        # ({A,B}, 2) -> A = B = mine
+
+        # ({A,B}, 0) -> A = B = safe
+
+        for covered_cells, covered_mines in check_list:
+
+            pt = list(covered_cells)[0]
+
+            if covered_mines == 0:
+
+                return [False, pt[1], pt[0]]
+
+            elif len(covered_cells) == covered_mines:
+
+                return [True, pt[1], pt[0]]
+
+        checked += check_list
+
+​
+
+        # Complex cases:
+
+        # ({A,B,C}, 2) and ({A,B}, 1) -> ({C}, 1)
+
+        # ({A,B,C}, 1) and ({A,B}, 1) -> ({C}, 0)
+
+        check_list = []
+
+        for (cells1, mines1), (cells2, mines2) in itertools.permutations(checked, 2):
+
+            if cells2 < cells1:
+
+                new_cells = cells1 - cells2
+
+                new_mines = mines1 - mines2
+
+                if not any(cells == new_cells for cells, _ in checked + check_list):
+
+                    check_list.append((new_cells, new_mines))
+
+​
+
+    raise Exception('I give up.')  # or click randomly
+
