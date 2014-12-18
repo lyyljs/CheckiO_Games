@@ -1,0 +1,33 @@
+
+
+from collections import Counter
+
+​
+
+def total_cost(calls):
+
+    db = Counter()
+
+    for call in calls:
+
+        day, time, duration = call.split()
+
+        db[day] += (int(duration) + 59) // 60
+
+    return sum(min if min < 100 else 2*min-100 for min in db.values())
+
+
+
+
+from collections import defaultdict
+
+from operator import methodcaller
+
+def total_cost(calls):
+
+    d=defaultdict(int)
+
+    for e in map(methodcaller('split'),calls): d[e[0]]+=(int(e[2])+59)//60
+
+    return sum(e if e<100 else 100+2*(e-100) for e in d.values())
+

@@ -1,0 +1,1 @@
+checkio=lambda x:bin(x).count('1')

@@ -43,7 +43,7 @@ def getdir(way):
             return dir
 
 def route_search(supply, order, pos, route, deep):
-    global got_result, map, opened, routes, count
+    global got_result, map, opened, routes, count, dir_flag, alldirs
     if got_result:
 #        print("Got Result")
         return True
@@ -51,8 +51,13 @@ def route_search(supply, order, pos, route, deep):
     m = len(map[0])
     if count[supply] > MAX_COUNT[supply]:
         return False
-    dir_f = dir_to_f(pos)
-    for t in WAYS[dir_f]:
+    if dir_flag:
+        dir_f = dir_flag - 1
+        way = alldirs[dir_f]
+    else:
+        dir_f = dir_to_f(pos)
+        way = WAYS[dir_f]
+    for t in way:
         x, y = pos[0] + t[0], pos[1] + t[1]
         if x < 0 or y < 0 or x >= n or y >= m or map[x][y] == "X" or map[x][y] in SUPPLYS or opened[x][y] == 1:
             pass
@@ -97,13 +102,31 @@ def get_orders(deep, order, used):
             used[i] = 0
         i += 1
 
+def get_dirs(deep, order, used):
+    global alldirs
+    i = 1
+    while i < 5:
+        if used[i]:
+            pass
+        else:
+            used[i] = 1
+            order.append(WAYS[0][i - 1])
+#            print(order)
+            if deep < 4:
+                get_dirs(deep + 1, order, used)
+            else:
+                alldirs.append(tuple(order))
+#                print(orders)
+            order.pop()
+            used[i] = 0
+        i += 1
 
 def supply_routes(the_map):
-    global got_result, map, opened, routes, pos_of_f, count, orders
+    global got_result, map, opened, routes, pos_of_f, count, orders, dir_flag, alldirs
     
     map = the_map
     got_result = False
-    opened, routes, orders, used = [], [], [], []
+    opened, routes, orders, used, alldirs = [], [], [], [], []
     
     for x in range(len(the_map)):
         temp = []
@@ -117,16 +140,20 @@ def supply_routes(the_map):
         used.append(0)
     get_orders(1, "", used)
     
-    for order in orders:
-        count = {1:0, 2:0, 3:0, 4:0}
-        for row in range(len(opened)):
-            for col in range(len(opened[0])):
-                opened[row][col] = 0
-        t = get_pos(order[0], the_map)
-        routes = []
-        route_search(1, order, t, "", 0)
-        if got_result:
-            return routes[order.index("1")], routes[order.index("2")], routes[order.index("3")], routes[order.index("4")]
+    get_dirs(1, [], used)
+    
+    for dir_flag in range(25):
+        for order in orders[::2]:
+            count = {1:0, 2:0, 3:0, 4:0}
+            for row in range(len(opened)):
+                for col in range(len(opened[0])):
+                    opened[row][col] = 0
+            t = get_pos(order[0], the_map)
+            routes = []
+            route_search(1, order, t, "", 0)
+            if got_result:
+                return routes[order.index("1")], routes[order.index("2")], routes[order.index("3")], routes[order.index("4")]
+    
     return routes
 
 if __name__ == '__main__':
@@ -169,13 +196,18 @@ if __name__ == '__main__':
         if factory_supply != [1, 1, 1, 1]:
             return False, "You should deliver all four resources"
         return True, "Great!"
-    '''
+#    '''
     print(    supply_routes((
-    "2.......",
-    "X.XXX.X.",
-    ".F..X.X.",
-    "..X.X.X.",
-    "1.3...X4",)))
+        ".....XX..2",
+        ".........3",
+        "..X......X",
+        "..XXXXXXXX",
+        "..........",
+        "..........",
+        "XXXXXXX...",
+        "1.......F4",
+        "X.XXXXXX..",
+        "..........",)))
                                     
     '''
     test1 = checker(supply_routes, ("..........",
@@ -240,4 +272,33 @@ if __name__ == '__main__':
                                     "2..X....."))
     print(test6[1])
     assert test6[0], "Sixth test"
-#    '''
+    
+    test8 = checker(supply_routes,(
+                                "..........",
+                                "1.......X.",
+                                "........X.",
+                                "........X.",
+                                "........X.",
+                                "........X.",
+                                "34.2....X.",
+                                "X.........",
+                                "...X...F.X",
+                                "....X.....",) )
+    print(test8[1])
+    assert test8[0], "Eighth test"
+
+    test9 = checker(supply_routes, (
+        ".....XX..2",
+        ".........3",
+        "..X......X",
+        "..XXXXXXXX",
+        "..........",
+        "..........",
+        "XXXXXXX...",
+        "1.......F4",
+        "X.XXXXXX..",
+        "..........",))
+    print(test9[1])
+    assert test9[0], "Ninth test"
+
+    '''
