@@ -1,0 +1,21 @@
+def check_connection(network, first, second):
+
+    setlist = []
+
+    for connection in network:
+
+        s = ab = set(connection.split('-'))
+
+        # unify all set related to a, b
+
+        for t in setlist[:]: # we need to use copy
+
+            if t & ab:       # check t include a, b
+
+                s |= t
+
+                setlist.remove(t)
+
+        setlist.append(s)    # only s include a, b
+
+    return any(set([first, second]) <= s for s in setlist)

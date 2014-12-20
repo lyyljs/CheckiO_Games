@@ -1,0 +1,21 @@
+"""Determine the number of (greedy) pigeons who will be fed."""
+import itertools
+
+def checkio(food):
+    """Given a quantity of food, return the number of pigeons who will eat."""
+    pigeons = 0
+    for t in itertools.count(1):
+        if pigeons + t > food:
+            # The food will be consumed this time step.
+            # All pigeons around last time were fed, and there is enough food
+            # this time step to feed 'food' pigeons, so return the max of each.
+            return max(pigeons, food)
+        # Increase pigeons, decrease food.
+        pigeons += t
+        food -= pigeons
+
+if __name__ == '__main__':
+    assert checkio(1) == 1, "1st example"
+    assert checkio(2) == 1, "2nd example"
+    assert checkio(5) == 3, "3rd example"
+    assert checkio(10) == 6, "4th example"
