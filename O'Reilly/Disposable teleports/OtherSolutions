@@ -1,0 +1,20 @@
+nodes=set("12345678")
+
+def solve(possible,been,am,path):
+    path+=am
+    if (am,been)==("1",nodes): return path
+    for dest in nodes:
+        edge=frozenset({am,dest})
+        if edge in possible:
+            sol=solve(possible-{edge},been|edge,dest,path)
+            if sol: return sol
+
+checkio=lambda t: solve(set(map(frozenset,t.split(","))),set(),"1","")
+
+------------------------------------------------------------------------
+
+
+e=lambda n,t,s:[n+c for l in t if n==l[0]for c in e(l[1],t-{l,l[::-1]},s-{n})]if s or n>'1'else[n]
+
+checkio=lambda r:e('1',set((r+","+r[::-1]).split(",")),set('2345678'))[0]
+

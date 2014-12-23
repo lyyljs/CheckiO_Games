@@ -1,0 +1,2 @@
+from cmath import*;checkio=lambda h,w:(lambda
+t,e:(t*w*h/3,t*abs(w+h*asin(e)/e)))(pi/2*w,sqrt(1-w/h*w/h)+1e-9)
