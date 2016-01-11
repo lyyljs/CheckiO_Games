@@ -57,11 +57,6 @@ checkio([
 
 </p>
 
-<p class="for_info_only">
-    <strong>How to use TryIt: </strong><br>
-    <iframe width="560" height="315" src="//www.youtube.com/embed/fUFgb_LU2z4" frameborder="0" allowfullscreen></iframe>
-</p>
-
 <p><strong>Precondition:</strong><br>
     There is either one winner or a draw.<br>
     len(game_result) == 3<br>
