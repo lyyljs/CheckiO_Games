@@ -1,27 +1,71 @@
-Almost everyone in the world knows about the ancient game Chess and has at least a basic understanding of its rules. It has various units with a wide range of movement patterns allowing for a huge number of possible different game positions (for example Number of possible chess games at the end of the n-th plies.) For this mission, we will examine the movements and behavior of chess pawns.
+<div class="task-description-text">
+                        <p>
+    Almost everyone in the world knows about the ancient game <a href="http://en.wikipedia.org/wiki/Chess">Chess</a>
+    and has at least a basic understanding of its rules.
+    It has various units with a wide range of movement patterns allowing
+    for a huge number of possible different game positions (for example
+    <a href="http://oeis.org/A048987">Number of possible chess games at the end of the n-th plies.</a>)
+    For this mission, we will examine the movements and behavior of chess pawns.
 
-Chess is a two-player strategy game played on a checkered game board laid out in eight rows (called ranks and denoted with numbers 1 to 8) and eight columns (called files and denoted with letters a to h) of squares. Each square of the chessboard is identified by a unique coordinate pair — a letter and a number (ex, "a1", "h8", "d6"). For this mission we only need to concern ourselves with pawns. A pawn may capture an opponent's piece on a square diagonally in front of it on an adjacent file, by moving to that square. For white pawns the front squares are squares with greater row than their.
+</p>
 
-A pawn is generally a weak unit, but we have 8 of them which we can use to build a pawn defense wall. With this strategy, one pawn defends the others. A pawn is safe if another pawn can capture a unit on that square. We have several white pawns on the chess board and only white pawns. You should design your code to find how many pawns are safe.
 
-pawns
+<p>
+    Chess is a two-player strategy game played on a checkered game board laid out in eight rows
+    (called ranks and denoted with numbers 1 to 8) and
+    eight columns (called files and denoted with letters a to h) of squares.
+    Each square of the chessboard is identified by a unique coordinate pair
+    — a letter and a number (ex, "a1", "h8", "d6").
+    For this mission we only need to concern ourselves with pawns.
+    A pawn may capture an opponent's piece on a square diagonally in front of it on an adjacent file,
+    by moving to that square. For white pawns the front squares are squares with greater row than their.
+</p>
 
-You are given a set of square coordinates where we have placed white pawns. You should count how many pawns are safe.
+<p>
+    A pawn is generally a weak unit, but we have 8 of them which we can use to build a pawn defense wall.
+    With this strategy, one pawn defends the others.
+    A pawn is safe if another pawn can capture a unit on that square.
+    We have several white pawns on the chess board and only white pawns.
+    You should design your code to find how many pawns are safe.
+</p>
 
-Input: Placed pawns coordinates as a set of strings.
+<p style="text-align: center;">
+    <img class="for_info_only" title="pawns" src="https://checkio.s3.amazonaws.com/task/media/aea94b197081464ca1748e4562b8fbae/pawns.png" alt="pawns" width="600px"/>
+    <img class="for_editor_only" title="pawns" src="https://checkio.s3.amazonaws.com/task/media/aea94b197081464ca1748e4562b8fbae/pawns.png" alt="pawns" width="380px"/>
+</p>
 
-Output: The number of safe pawns as a integer.
+<p>
+    You are given a set of square coordinates where we have placed white pawns.
+    You should count how many pawns are safe.
+</p>
+<p>
+    <strong>Input: </strong> Placed pawns coordinates as a set of strings.
+</p>
 
-Example:
+<p>
+    <strong>Output: </strong> The number of safe pawns as a integer.
+</p>
 
+
+
+<div class="for_info_only">
+    <p>
+        <strong>Example:</strong>
+    </p>
+    <pre class="brush: python">
 safe_pawns({"b4", "d4", "f4", "c3", "e3", "g5", "d2"}) == 6
+safe_pawns({"b4", "c4", "d4", "e4", "f4", "g4", "e5"}) == 1</pre>
+<br>
+</div>
 
-safe_pawns({"b4", "c4", "d4", "e4", "f4", "g4", "e5"}) == 1
+<p class="for_info_only">
+    <strong>How it is used: </strong>
+    For a game AI one of the important tasks is the ability to estimate game state.
+    This concept will show how you can do this on the simple chess figures positions.
+</p>
 
-
-
-
-How it is used: For a game AI one of the important tasks is the ability to estimate game state. This concept will show how you can do this on the simple chess figures positions.
-
-Precondition:
-0 < pawns ≤ 8
+<p>
+    <strong>Precondition:</strong><br>
+    0 &lt; pawns &le; 8
+</p>
+ </div>
