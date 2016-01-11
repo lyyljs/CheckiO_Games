@@ -1,45 +1,71 @@
-Tic-Tac-Toe, sometimes also known as Xs and Os, is a game for two players (X and O) who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three respective marks in a horizontal, vertical, or diagonal rows (NW-SE and NE-SW) wins the game.
+<div class="task-description-text">
+                        <p>
+    Tic-Tac-Toe, sometimes also known as Xs and Os, is a game for two players
+    (X and O) who take turns marking the spaces in a 3×3 grid.
+    The player who succeeds in placing three respective marks in a horizontal, vertical, or diagonal rows (NW-SE and
+    NE-SW) wins the game.
+</p>
 
-But we will not be playing this game. You will be the referee for this games results. You are given a result of a game and you must determine if the game ends in a win or a draw as well as who will be the winner. Make sure to return "X" if the X-player wins and "O" if the O-player wins. If the game is a draw, return "D".
+<p>
+    But we will not be playing this game. You will be the referee for this games results. You are given a result of a
+    game and you must determine if the game ends in a win or a draw as well as who will be the winner. Make sure to
+    return "X"
+    if the X-player wins and "O" if the O-player wins. If the game is a draw, return "D".
+</p>
 
-x-o-referee
+<p style="text-align: center;">
+    <img class="for_info_only" title="x-o-referee" src="https://checkio.s3.amazonaws.com/task/media/4abe068a7ce44b3a86828a8e17cad1b4/x-o-referee.png" alt="x-o-referee" width="600px"/>
+    <img class="for_editor_only" title="x-o-referee" src="https://checkio.s3.amazonaws.com/task/media/4abe068a7ce44b3a86828a8e17cad1b4/x-o-referee.png" alt="x-o-referee" width="380px"/>
+</p>
 
-A game's result is presented as a list of strings, where "X" and "O" are players' marks and "." is the empty cell.
 
-Input: A game result as a list of strings (unicode).
+<p>
+    A game's result is presented as a list of strings, where "X" and "O" are players' marks and "." is the empty cell.
+</p>
 
-Output: "X", "O" or "D" as a string.
 
-Example:
+<p>
+    <strong>Input: </strong> A game result as a list of strings (unicode).
+</p>
 
-checkio([
+<p>
+    <strong>Output: </strong> "X", "O" or "D" as a string.
+</p>
 
+
+<div class="for_info_only">
+    <p>
+        <strong>Example:</strong>
+    </p>
+<pre class="brush: python">checkio([
     "X.O",
-
     "XX.",
-
     "XOO"]) == "X"
-
 checkio([
-
     "OO.",
-
     "XOX",
-
     "XOX"]) == "O"
-
 checkio([
-
     "OOX",
-
     "XXO",
+    "OXX"]) == "D"</pre>
+</div>
+<p class="for_info_only">
+    <strong>How it is used: </strong>
+    The concepts in this task will help you when iterating data types.
+    They can  also be used in game algorithms, allowing you to know how to check results.
 
-    "OXX"]) == "D"
+</p>
 
+<p class="for_info_only">
+    <strong>How to use TryIt: </strong><br>
+    <iframe width="560" height="315" src="//www.youtube.com/embed/fUFgb_LU2z4" frameborder="0" allowfullscreen></iframe>
+</p>
 
-How it is used: The concepts in this task will help you when iterating data types. They can also be used in game algorithms, allowing you to know how to check results.
+<p><strong>Precondition:</strong><br>
+    There is either one winner or a draw.<br>
+    len(game_result) == 3<br>
+    all(len(row) == 3 for row in game_result)
+</p>
 
-Precondition:
-There is either one winner or a draw.
-len(game_result) == 3
-all(len(row) == 3 for row in game_result)
+</div>
