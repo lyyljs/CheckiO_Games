@@ -1,0 +1,4 @@
+def checkio(anything):
+    class T:
+        __lt__=__gt__=__le__=__ge__=__eq__=__ne__ = lambda a, b: True
+    return T()
